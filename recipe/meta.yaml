@@ -1,17 +1,12 @@
-{% set name = "pyjks" %}
-{% set version = "18.0.0" %}
-{% set file_ext = "tar.gz" %}
-{% set hash_type = "sha256" %}
-{% set hash_value = "72e478c59c3fd19c869b5c6f2822be5756c38771f148c315bb71b76cf93482ed" %}
+{% set version = "19.0.0" %}
 
 package:
-  name: '{{ name|lower }}'
-  version: '{{ version }}'
+  name: pyjks
+  version: {{ version }}
 
 source:
-  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
-  '{{ hash_type }}': '{{ hash_value }}'
+  url: https://pypi.io/packages/source/p/pyjks/pyjks-{{ version }}.tar.gz
+  sha256: 9ce5b40289bcdffcd6a8e7118b333ba8ba2ec4c9ebc5e324885cc8a69767011a
 
 build:
   number: 0
@@ -22,17 +17,12 @@ requirements:
   host:
     - python
     - pip
-    - pyasn1
-    - pyasn1-modules
-    - javaobj-py3
-    - pycryptodome
-    - twofish
   run:
     - python
-    - pyasn1
+    - pyasn1 >=0.3.5
     - pyasn1-modules
     - javaobj-py3
-    - pycryptodome
+    - pycryptodomex
     - twofish
 
 test:
@@ -44,9 +34,22 @@ about:
   license: MIT
   license_family: MIT
   summary: Pure-Python Java Keystore (JKS) library
-  description: "PyJKS enables Python projects to load and manipulate Java KeyStore\n(JKS) data without a JVM dependency. PyJKS supports JKS, JCEKS, BKS\nand UBER (BouncyCastle) keystores. Simply::\n\n \
-    \ pip install pyjks\n\nOr::\n\n  easy_install pyjks\n\nThen::\n\n  import jks\n\n  keystore = jks.KeyStore.load('keystore.jks', 'passphrase')\n\n  print(ks.private_keys)\n  print(ks.certs)\n  print(ks.secret_keys)\n\
-    \nAnd that's barely scratching the surface. Check out `the usage examples on\nGitHub <https://github.com/kurtbrose/pyjks#usage-examples>`_ for\nmore!\n\n"
+  description: |
+    PyJKS enables Python projects to load and manipulate Java KeyStore
+    (JKS) data without a JVM dependency. PyJKS supports JKS, JCEKS, BKS
+    and UBER (BouncyCastle) keystores.
+    Simply::
+      pip install pyjks
+    Or::
+        easy_install pyjks
+      Then::
+        import jks
+        keystore = jks.KeyStore.load('keystore.jks', 'passphrase')
+        print(ks.private_keys)
+        print(ks.certs)
+        print(ks.secret_keys)
+    And that's barely scratching the surface. Check out `the usage examples on
+    GitHub <https://github.com/kurtbrose/pyjks#usage-examples>`_ for more!"
 
 extra:
   recipe-maintainers:
